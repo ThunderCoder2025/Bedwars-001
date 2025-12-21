@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.thunderlight11jk.bedwars</groupId>
+  <artifactId>bedwars-001</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>BedWars-001</name>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <spigot.version>1.8.8-R0.1-SNAPSHOT</spigot.version>
+    <xseries.version>9.8.0</xseries.version>
+    <lombok.version>1.18.26</lombok.version>
+  </properties>
+
+  <!-- Repositories -->
+  <repositories>
+    <!-- Spigot -->
+    <repository>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+
+    <!-- Vault -->
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+
+    <!-- XSeries -->
+    <repository>
+      <id>codemc</id>
+      <url>https://repo.codemc.io/repository/maven-public/</url>
+    </repository>
+  </repositories>
+
+  <!-- Dependencies -->
+  <dependencies>
+
+    <!-- Spigot API (PROVIDED by server) -->
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>${spigot.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Vault API (DO NOT SHADE) -->
+    <dependency>
+      <groupId>net.milkbowl.vault</groupId>
+      <artifactId>VaultAPI</artifactId>
+      <version>1.7.3</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/libs/Vault.jar</systemPath>
+    </dependency>
+
+
+    <!-- XSeries -->
+    <dependency>
+      <groupId>com.github.cryptomorin</groupId>
+      <artifactId>XSeries</artifactId>
+      <version>${xseries.version}</version>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <!-- Java 8 Compiler -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+
+      <!-- Shade XSeries ONLY -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+
+              <relocations>
+                <relocation>
+                  <pattern>com.cryptomorin</pattern>
+                  <shadedPattern>com.thunderlight11jk.libs.xseries</shadedPattern>
+                </relocation>
+              </relocations>
+
+              <artifactSet>
+                <excludes>
+                  <exclude>org.spigotmc:spigot-api</exclude>
+                  <exclude>com.github.MilkBowl:VaultAPI</exclude>
+                </excludes>
+              </artifactSet>
+
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>
