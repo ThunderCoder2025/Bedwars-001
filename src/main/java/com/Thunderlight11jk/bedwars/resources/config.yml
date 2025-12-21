@@ -1,0 +1,56 @@
+prefix: '&8[&c&lBEDWARS&8] &r'
+lobby-world: world
+lobby-location:
+  world: world
+  x: 0.0
+  y: 64.0
+  z: 0.0
+  yaw: 0.0
+  pitch: 0.0
+min-players: 2
+max-players: 16
+countdown-time: 20
+bed-break-countdown: 30
+game-time: 1200
+
+scoreboard:
+  update-interval: 20
+  title: '&e&lBEDWARS'
+
+generators:
+  iron:
+    spawn-delay: 20
+    max-stack: 48
+  gold:
+    spawn-delay: 160
+    max-stack: 12
+  diamond:
+    tier-1-delay: 600
+    tier-2-delay: 300
+    tier-3-delay: 100
+    max-stack: 8
+  emerald:
+    tier-1-delay: 1200
+    tier-2-delay: 600
+    tier-3-delay: 300
+    max-stack: 4
+
+dragon:
+  spawn-time: 1800
+  damage-multiplier: 1.5
+
+messages:
+  game-start: '&aThe game has started!'
+  bed-destroyed: '&c&lBED DESTRUCTION > &r{team} Bed was destroyed by {player}!'
+  player-eliminated: '&c{player} &7was eliminated by {killer}&7.'
+  final-kill: '&e&lFINAL KILL! &r&7{victim} &7was killed by {killer}&7.'
+  team-eliminated: '&f&lTEAM ELIMINATED > {team} &chas been eliminated!'
+  respawn-title: '&c&lYOU DIED!'
+  respawn-subtitle: '&eYou will respawn in &c{time} &eseconds!'
+  bed-gone-title: '&c&lBED DESTROYED!'
+  bed-gone-subtitle: '&7You will no longer respawn!'
+  victory: '&6&l&m-----------------------------\n&f&lBedWars\n\n&e&lWINNER! - {team}\n\n&6&l&m-----------------------------'
+  
+shops:
+  item-shop-title: '&8Item Shop'
+  upgrade-shop-title: '&8Upgrades & Traps'
